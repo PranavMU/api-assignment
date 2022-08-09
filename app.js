@@ -80,28 +80,9 @@ app.post("/customer",(req,res)=>{ //3
   })
 
   //ordertable
-  app.post("/orders",(req,res)=>{ //3
-    try{
-        Ordermodal.create({customer_id:req.body.customer_id,inventory_id:req.body.inventory_id,quantity:req.body.quantity
-        }).then((data)=>{
-            res.status(200).send({"status":"order added",data})
-        })
-    }
-    catch(err){
-        res.status(404).send("error")
-    }
-  })
-  app.get("/orders",(req,res)=>{//4
-    Ordermodal.find({}).then((user)=>{
-    if(user.length){
-      res.send(user)
-    }else{
-      res.send("empty")
-    }
-  
-    })
-  })
+
   app.post("/orders",(req, res) => {
+    console.log(req.body)
     const array = Inventmodal.find({inventory_id: req.body.inventory_id});
     if (array.available_quantity < req.body.quantity) {
       res.send("Not Available");
@@ -112,6 +93,7 @@ app.post("/customer",(req,res)=>{ //3
         { $set: {available_quantity: updated} }
       )
       try {
+        console.log(req.body)
         res.send(data);
       } catch (err) {
         console.log(err);
