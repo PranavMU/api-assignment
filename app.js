@@ -59,7 +59,7 @@ app.post("/inventadd",(req,res)=>{ //3
 //customer
 app.post("/customer",(req,res)=>{ //3
     try{
-        Customermodal.create({customer_id:req.body.customer_id,inventory_id:req.body.inventory_id,quantity:req.body.quantity
+        Customermodal.create({customer_id:req.body.customer_id,customer_name:req.body.customer_name,email:req.body.email
         }).then((data)=>{
             res.status(200).send({"status":"customer added",data})
         })
